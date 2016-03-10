@@ -19,4 +19,8 @@ public class Tile {
         this.type = type;
         size = new Dimension(64, 64);
     }
+
+    public boolean isCrossable() {
+        return type.isCrossable();
+    }
 }

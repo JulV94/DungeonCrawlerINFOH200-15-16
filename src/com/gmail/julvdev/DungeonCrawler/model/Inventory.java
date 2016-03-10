@@ -12,6 +12,10 @@ public class Inventory {
 
     private ArrayList<Item> items;
 
+    public Inventory() {
+        // Empty inventory
+    }
+
     public Inventory(ArrayList<Item> items) {
         this.items = items;
     }

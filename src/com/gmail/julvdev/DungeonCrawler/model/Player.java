@@ -9,7 +9,9 @@ import java.awt.image.BufferedImage;
 public class Player extends Character {
 
 
-    public Player(BufferedImage img, Inventory inventory, int maxLife, int life) {
-        super(img, inventory, maxLife, life);
+    public Player(BufferedImage img, Inventory inventory, int maxLife, int life, Location location) {
+        super(img, inventory, maxLife, life, location);
     }
+
+
 }

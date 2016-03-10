@@ -10,17 +10,36 @@ import java.io.IOException;
  * Type defined for the tile
  */
 public enum TileType {
-    GRASS("img/tiles/grass.png", true),
-    DIRT("img/tiles/dirt.png", true),
-    GRAVEL("img/tiles/gravel.png", true),
-    BRICK_WALL("img/tiles/brick_wall.png", false),
-    STONE_WALL("img/tiles/stone_wall.png", false);
+    VOID(0, "img/tiles/void.png", false),
+    GRASS(1, "img/tiles/grass.png", true),
+    DIRT(2, "img/tiles/dirt.png", true),
+    GRAVEL(3, "img/tiles/gravel.png", true),
+    BRICK_WALL(4, "img/tiles/brick_wall.png", false),
+    STONE_WALL(5, "img/tiles/stone_wall.png", false);
 
+    private int id;
     private BufferedImage img;
     private boolean crossable;
 
-    TileType(String imgPath, boolean crossable) throws IOException {
-        img = ImageIO.read(new File(imgPath));
+    TileType(int id, String imgPath, boolean crossable) {
+        this.id=id;
+        try {
+            img = ImageIO.read(new File(imgPath));
+        } catch (IOException e) {
+            e.printStackTrace();
+            System.err.print("Wrong file specified in the TileType enumeration.");
+        }
         this.crossable = crossable;
+    }
+
+    public static TileType getById(int id) {
+        for(TileType e : values()) {
+            if(e.id == id) return e;
+        }
+        return null;
+    }
+
+    public boolean isCrossable() {
+        return crossable;
     }
 }
