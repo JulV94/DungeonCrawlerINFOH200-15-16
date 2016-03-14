@@ -1,5 +1,6 @@
 package com.gmail.julvdev.DungeonCrawler;
 
+import com.gmail.julvdev.DungeonCrawler.controller.Controller;
 import com.gmail.julvdev.DungeonCrawler.model.GameModel;
 import com.gmail.julvdev.DungeonCrawler.view.GameFrame;
 
@@ -9,6 +10,6 @@ import com.gmail.julvdev.DungeonCrawler.view.GameFrame;
  */
 public class DungeonCrawler {
     public static void main(String[] args) {
-        new GameModel(new GameFrame("Dungeon Crawler"));
+        new Controller(new GameModel(), new GameFrame("Dungeon Crawler"));
     }
 }

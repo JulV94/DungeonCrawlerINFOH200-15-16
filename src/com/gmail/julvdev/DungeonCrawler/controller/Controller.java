@@ -1,40 +1,24 @@
 package com.gmail.julvdev.DungeonCrawler.controller;
 
-import com.gmail.julvdev.DungeonCrawler.model.GameModel;
-import com.gmail.julvdev.DungeonCrawler.model.interfaces.ControllerInterface;
-
-import java.awt.event.KeyEvent;
-import java.awt.event.KeyListener;
+import com.gmail.julvdev.DungeonCrawler.observerpattern.Observable;
+import com.gmail.julvdev.DungeonCrawler.observerpattern.Observer;
 
 /**
  * Created by julien on 10/03/16.
  * Controller
  */
-public class Controller implements KeyListener, ControllerInterface {
+public class Controller implements Observer {
 
-    private GameModel model;
+    private Observable model;
+    private Observable view;
 
-    public Controller(GameModel model) {
+    public Controller(Observable model, Observable view) {
         this.model = model;
+        this.view = view;
     }
 
     @Override
-    public void keyTyped(KeyEvent keyEvent) {
-        playerMove(1, 0);
-    }
+    public void update(String str) {
 
-    @Override
-    public void keyPressed(KeyEvent keyEvent) {
-        playerMove(1, 0);
-    }
-
-    @Override
-    public void keyReleased(KeyEvent keyEvent) {
-        playerMove(1, 0);
-    }
-
-    @Override
-    public void playerMove(int x, int y) {
-        model.getPlayer().move(x, y);
     }
 }

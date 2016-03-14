@@ -1,36 +1,43 @@
 package com.gmail.julvdev.DungeonCrawler.model;
 
-import com.gmail.julvdev.DungeonCrawler.controller.Controller;
-import com.gmail.julvdev.DungeonCrawler.model.interfaces.ControllerInterface;
-import com.gmail.julvdev.DungeonCrawler.model.interfaces.ViewInterface;
+import com.gmail.julvdev.DungeonCrawler.observerpattern.Observable;
+import com.gmail.julvdev.DungeonCrawler.observerpattern.Observer;
 
-import javax.imageio.ImageIO;
-import java.io.File;
-import java.io.IOException;
+import java.util.ArrayList;
 
 /**
  * Created by julien on 10/03/16.
  * Model of the game
  */
-public class GameModel {
+public class GameModel implements Observable {
 
-    private ControllerInterface controllerInterface;
+    private ArrayList<Observer> listObserver = new ArrayList<>();
     private Player player;
-    private ViewInterface viewInterface;
 
-    public GameModel(ViewInterface view) {
-        controllerInterface = new Controller(this);
-        viewInterface = view;
-        try {
-            player = new Player(ImageIO.read(new File("img/player.png")), new Inventory(), 100, 100, new Location(1, 1));
-        } catch (IOException e) {
-            e.printStackTrace();
-            System.err.print("Texture of the player not found");
+    public GameModel() {
+
+    }
+
+
+    // Observer part
+    @Override
+    public void addObserver(Observer obs) {
+        this.listObserver.add(obs);
+    }
+
+    @Override
+    public void removeObserver() {
+        this.listObserver = new ArrayList<>();
+    }
+
+    @Override
+    public void notifyObserver(String str) {
+        if(str.matches("^0[0-9]+")) {
+            str = str.substring(1, str.length());
+        }
+
+        for(Observer obs : listObserver) {
+            obs.update(str);
         }
     }
-
-    public Player getPlayer() {
-        return player;
-    }
-
 }
