@@ -10,6 +10,10 @@ import com.gmail.julvdev.DungeonCrawler.view.GameFrame;
  */
 public class DungeonCrawler {
     public static void main(String[] args) {
-        new Controller(new GameModel(), new GameFrame("Dungeon Crawler"));
+        Controller controller = new Controller();
+        GameModel game = new GameModel(controller);
+        controller.setModel(game);
+        GameFrame frame = new GameFrame("Dungeon Crawler",controller);
+        controller.setView(frame);
     }
 }

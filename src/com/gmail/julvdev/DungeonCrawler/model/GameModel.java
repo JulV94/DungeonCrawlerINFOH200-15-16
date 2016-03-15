@@ -1,5 +1,6 @@
 package com.gmail.julvdev.DungeonCrawler.model;
 
+import com.gmail.julvdev.DungeonCrawler.controller.Controller;
 import com.gmail.julvdev.DungeonCrawler.observerpattern.Observable;
 import com.gmail.julvdev.DungeonCrawler.observerpattern.Observer;
 
@@ -14,10 +15,12 @@ public class GameModel implements Observable {
     private ArrayList<Observer> listObserver = new ArrayList<>();
     private Player player;
 
-    public GameModel() {
+    public GameModel(Controller controller) {
+        listObserver.add(controller);
+    }
+    public void update(String str){
 
     }
-
 
     // Observer part
     @Override
@@ -37,7 +40,7 @@ public class GameModel implements Observable {
         }
 
         for(Observer obs : listObserver) {
-            obs.update(str);
+            obs.update(str,true);
         }
     }
 }

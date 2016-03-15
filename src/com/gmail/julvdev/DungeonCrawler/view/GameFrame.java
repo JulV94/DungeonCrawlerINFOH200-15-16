@@ -1,5 +1,6 @@
 package com.gmail.julvdev.DungeonCrawler.view;
 
+import com.gmail.julvdev.DungeonCrawler.controller.Controller;
 import com.gmail.julvdev.DungeonCrawler.observerpattern.Observable;
 import com.gmail.julvdev.DungeonCrawler.observerpattern.Observer;
 
@@ -17,7 +18,7 @@ public class GameFrame extends JFrame implements Observable {
     private MapPanel mapPanel;
     private HUDPanel hudPanel;
 
-    public GameFrame(String title) {
+    public GameFrame(String title,Controller controller) {
         super(title);
 
         this.setSize(new Dimension(800, 800));
@@ -34,6 +35,10 @@ public class GameFrame extends JFrame implements Observable {
 
         this.setContentPane(layout);
         this.setVisible(true);
+        listObserver.add(controller);
+    }
+    public void update(String str){
+
     }
 
     // Observer part
@@ -54,7 +59,7 @@ public class GameFrame extends JFrame implements Observable {
         }
 
         for(Observer obs : listObserver) {
-            obs.update(str);
+            obs.update(str,false);
         }
     }
 }
