@@ -3,6 +3,7 @@ package com.gmail.julvdev.DungeonCrawler.model;
 import com.gmail.julvdev.DungeonCrawler.controller.Controller;
 import com.gmail.julvdev.DungeonCrawler.observerpattern.Observable;
 import com.gmail.julvdev.DungeonCrawler.observerpattern.Observer;
+import com.gmail.julvdev.DungeonCrawler.observerpattern.Update;
 
 import java.util.ArrayList;
 
@@ -16,10 +17,14 @@ public class GameModel implements Observable {
     private Player player;
 
     public GameModel(Controller controller) {
-        listObserver.add(controller);
+        addObserver(controller);
     }
-    public void update(String str){
 
+    public void update(String str){
+        if (str.equals("mvPlayer")) {
+            System.out.println("Player is moving in model");
+            notifyObserver("mvPlayer", Update.VIEW);
+        }
     }
 
     // Observer part
@@ -34,13 +39,13 @@ public class GameModel implements Observable {
     }
 
     @Override
-    public void notifyObserver(String str) {
+    public void notifyObserver(String str, Update target) {
         if(str.matches("^0[0-9]+")) {
             str = str.substring(1, str.length());
         }
 
         for(Observer obs : listObserver) {
-            obs.update(str,true);
+            obs.update(str, target);
         }
     }
 }

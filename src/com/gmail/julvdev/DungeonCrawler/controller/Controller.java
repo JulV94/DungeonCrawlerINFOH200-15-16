@@ -3,6 +3,7 @@ package com.gmail.julvdev.DungeonCrawler.controller;
 import com.gmail.julvdev.DungeonCrawler.model.GameModel;
 import com.gmail.julvdev.DungeonCrawler.observerpattern.Observable;
 import com.gmail.julvdev.DungeonCrawler.observerpattern.Observer;
+import com.gmail.julvdev.DungeonCrawler.observerpattern.Update;
 import com.gmail.julvdev.DungeonCrawler.view.GameFrame;
 
 /**
@@ -26,10 +27,14 @@ public class Controller implements Observer {
     }
 
     @Override
-    public void update(String str,boolean model) {
-        if (model)
-            this.model.update(str);
-        else
-            this.view.update(str);
+    public void update(String str, Update target) {
+        switch (target) {
+            case MODEL:
+                this.model.update(str);
+                break;
+            case VIEW:
+                this.view.update(str);
+                break;
+        }
     }
 }

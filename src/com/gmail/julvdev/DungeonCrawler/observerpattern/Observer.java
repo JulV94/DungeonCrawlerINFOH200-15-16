@@ -5,5 +5,5 @@ package com.gmail.julvdev.DungeonCrawler.observerpattern;
  * Observer interface
  */
 public interface Observer {
-    void update(String str,boolean model);
+    void update(String str, Update target);
 }
