@@ -1,9 +1,9 @@
 package com.gmail.julvdev.DungeonCrawler.controller;
 
 import com.gmail.julvdev.DungeonCrawler.model.GameModel;
-import com.gmail.julvdev.DungeonCrawler.observerpattern.Observable;
 import com.gmail.julvdev.DungeonCrawler.observerpattern.Observer;
-import com.gmail.julvdev.DungeonCrawler.observerpattern.Update;
+import com.gmail.julvdev.DungeonCrawler.observerpattern.TargetType;
+import com.gmail.julvdev.DungeonCrawler.observerpattern.Updater;
 import com.gmail.julvdev.DungeonCrawler.view.GameFrame;
 
 /**
@@ -27,13 +27,13 @@ public class Controller implements Observer {
     }
 
     @Override
-    public void update(String str, Update target) {
-        switch (target) {
+    public void update(Updater obj) {
+        switch (obj.getTarget()) {
             case MODEL:
-                this.model.update(str);
+                this.model.update(obj);
                 break;
             case VIEW:
-                this.view.update(str);
+                this.view.update(obj);
                 break;
         }
     }

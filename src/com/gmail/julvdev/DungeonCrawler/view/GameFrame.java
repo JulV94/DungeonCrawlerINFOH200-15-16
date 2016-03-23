@@ -3,7 +3,8 @@ package com.gmail.julvdev.DungeonCrawler.view;
 import com.gmail.julvdev.DungeonCrawler.controller.Controller;
 import com.gmail.julvdev.DungeonCrawler.observerpattern.Observable;
 import com.gmail.julvdev.DungeonCrawler.observerpattern.Observer;
-import com.gmail.julvdev.DungeonCrawler.observerpattern.Update;
+import com.gmail.julvdev.DungeonCrawler.observerpattern.TargetType;
+import com.gmail.julvdev.DungeonCrawler.observerpattern.Updater;
 import com.gmail.julvdev.DungeonCrawler.view.inputs.KeyboardInputs;
 
 import javax.swing.*;
@@ -42,8 +43,8 @@ public class GameFrame extends JFrame implements Observable {
 
         addObserver(controller);
     }
-    public void update(String str){
-        if (str.equals("mvPlayer")) {
+    public void update(Updater obj){
+        if (obj.getAction().equals("mvPlayer")) {
             System.out.println("Player is moving in the view");
         }
     }
@@ -60,13 +61,10 @@ public class GameFrame extends JFrame implements Observable {
     }
 
     @Override
-    public void notifyObserver(String str, Update target) {
-        if(str.matches("^0[0-9]+")) {
-            str = str.substring(1, str.length());
-        }
+    public void notifyObserver(Updater obj) {
 
         for(Observer obs : listObserver) {
-            obs.update(str, target);
+            obs.update(obj);
         }
     }
 }

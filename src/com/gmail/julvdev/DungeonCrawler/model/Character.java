@@ -3,8 +3,6 @@ package com.gmail.julvdev.DungeonCrawler.model;
 import com.gmail.julvdev.DungeonCrawler.model.Items.Armor;
 import com.gmail.julvdev.DungeonCrawler.model.Items.Weapon;
 
-import java.awt.*;
-import java.awt.datatransfer.StringSelection;
 import java.awt.image.BufferedImage;
 
 /**

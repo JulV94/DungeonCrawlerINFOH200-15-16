@@ -7,5 +7,5 @@ package com.gmail.julvdev.DungeonCrawler.observerpattern;
 public interface Observable {
     void addObserver(Observer obs);
     void removeObserver();
-    void notifyObserver(String str, Update target);
+    void notifyObserver(Updater obj);
 }

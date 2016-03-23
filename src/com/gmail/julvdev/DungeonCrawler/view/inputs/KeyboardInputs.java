@@ -3,7 +3,8 @@ package com.gmail.julvdev.DungeonCrawler.view.inputs;
 import com.gmail.julvdev.DungeonCrawler.controller.Controller;
 import com.gmail.julvdev.DungeonCrawler.observerpattern.Observable;
 import com.gmail.julvdev.DungeonCrawler.observerpattern.Observer;
-import com.gmail.julvdev.DungeonCrawler.observerpattern.Update;
+import com.gmail.julvdev.DungeonCrawler.observerpattern.TargetType;
+import com.gmail.julvdev.DungeonCrawler.observerpattern.Updater;
 
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
@@ -29,16 +30,16 @@ public class KeyboardInputs implements KeyListener, Observable {
     public void keyPressed(KeyEvent keyEvent) {
         switch (keyEvent.getKeyCode()) {
             case KeyEvent.VK_LEFT:
-                notifyObserver("mvPlayer", Update.MODEL);
+                notifyObserver(new Updater(TargetType.MODEL, "mvPlayer"));
                 break;
             case KeyEvent.VK_RIGHT:
-                notifyObserver("mvPlayer", Update.MODEL);
+                notifyObserver(new Updater(TargetType.MODEL, "mvPlayer"));
                 break;
             case KeyEvent.VK_UP:
-                notifyObserver("mvPlayer", Update.MODEL);
+                notifyObserver(new Updater(TargetType.MODEL, "mvPlayer"));
                 break;
             case KeyEvent.VK_DOWN:
-                notifyObserver("mvPlayer", Update.MODEL);
+                notifyObserver(new Updater(TargetType.MODEL, "mvPlayer"));
                 break;
             case KeyEvent.VK_ESCAPE:
             case KeyEvent.VK_P:
@@ -64,13 +65,10 @@ public class KeyboardInputs implements KeyListener, Observable {
     }
 
     @Override
-    public void notifyObserver(String str, Update target) {
-        if(str.matches("^0[0-9]+")) {
-            str = str.substring(1, str.length());
-        }
+    public void notifyObserver(Updater obj) {
 
         for(Observer obs : listObserver) {
-            obs.update(str, target);
+            obs.update(obj);
         }
     }
 }
